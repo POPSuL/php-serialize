@@ -97,13 +97,17 @@ func parseNext(in []byte, i int) (*types.Value, int, error) {
 				Type:  types.TypeFloat,
 				Float: val,
 			}, offset + 1, nil
-		case 's':
+		case 's', 'E':
 			val, offset, err := peekInteger(in, i)
 			if err != nil {
 				return nil, i, err
 			}
 			i = offset + 2
-			return types.NewString(string(in[i : i+val])), i + val + 2, nil
+			if b == 's' {
+				return types.NewString(string(in[i : i+val])), i + val + 2, nil
+			} else {
+				return types.NewEnum(string(in[i : i+val])), i + val + 2, nil
+			}
 		case 'N':
 			return &types.Value{
 				Type: types.TypeNull,

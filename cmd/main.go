@@ -70,6 +70,8 @@ func printZval(sb *strings.Builder, v *types.Value, level int) {
 		}
 		sb.Write(bytes.Repeat([]byte{' '}, (level-1)*2))
 		sb.WriteString("}")
+	case types.TypeEnum:
+		sb.WriteString(v.Enum)
 	}
 }
 

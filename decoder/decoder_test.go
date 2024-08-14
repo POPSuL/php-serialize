@@ -33,6 +33,14 @@ func TestString(t *testing.T) {
 	assert.Equal(t, "s", out.Str)
 }
 
+func TestEnum(t *testing.T) {
+	in := "E:6:\"Test:A\";"
+	out, err := Decode([]byte(in))
+	assert.NoError(t, err)
+	assert.Equal(t, TypeEnum, out.Type)
+	assert.Equal(t, "Test:A", out.Enum)
+}
+
 func TestNull(t *testing.T) {
 	in := "N;"
 	out, err := Decode([]byte(in))

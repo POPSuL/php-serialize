@@ -16,6 +16,7 @@ const (
 	TypeBoolean Type = 'b'
 	TypeArray   Type = 'a'
 	TypeObject  Type = 'o'
+	TypeEnum    Type = 'e'
 )
 
 type Object struct {
@@ -34,6 +35,7 @@ type Value struct {
 	Str     string
 	Array   map[*Value]*Value
 	Object  *Object
+	Enum    string
 }
 
 func (v *Value) String() string {
@@ -60,6 +62,8 @@ func (v *Value) String() string {
 		return sb.String()
 	case TypeObject:
 		return fmt.Sprintf("<object of %s>", v.Object.Name)
+	case TypeEnum:
+		return v.Enum
 	}
 	return "<unknown>"
 }
@@ -68,6 +72,13 @@ func NewString(s string) *Value {
 	return &Value{
 		Type: TypeString,
 		Str:  s,
+	}
+}
+
+func NewEnum(s string) *Value {
+	return &Value{
+		Type: TypeEnum,
+		Enum: s,
 	}
 }
 
