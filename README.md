@@ -1,5 +1,5 @@
 # php-serialize
-![Coverage](https://img.shields.io/badge/Coverage-53.9%25-yellow)
+![Coverage](https://img.shields.io/badge/Coverage-54.1%25-yellow)
 
 Go-based decoder for php-serialized objects.
 
